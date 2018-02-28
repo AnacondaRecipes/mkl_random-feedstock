@@ -12,26 +12,31 @@ source:
 
 build:
     number: {{buildnumber}}
-    skip: True  # [win and py27]
+    # not compatible with vs2008.
+    skip: True  # [win and vc<14]
+    script: python setup.py config build install --old-and-unmanageable
 
 requirements:
     build:
+      - {{ compiler('c') }}
+      - {{ compiler('cxx') }}
+    host:
       - python
       - setuptools
-      - toolchain
-      - mkl-devel
+      - mkl-devel  {{ mkl }}
       - cython
-      - numpy 1.11.*
+      - numpy  1.11.*
     run:
       - python
-      - mkl
-      - numpy >=1.11
+      - {{ pin_compatible('numpy') }}
 
 test:
     commands:
       - nosetests -v mkl_random
     requires:
       - nose
+      # tests utilize suppress_warnings,
+      - numpy >=1.13
     imports:
       - mkl_random
       - mkl_random.mklrand
@@ -45,7 +50,6 @@ about:
         mirroring numpy.random, but exposing all choices of sampling algorithms available in MKL.
     summary:
         Intel (R) MKL-powered package for sampling from common probability distributions into NumPy arrays.
-
 
 extra:
     recipe-maintainers:
