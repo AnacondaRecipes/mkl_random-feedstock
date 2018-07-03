@@ -16,7 +16,7 @@ source:
 build:
     number: {{buildnumber}}
     # not compatible with vs2008.
-    skip: True  # [win and vc<14]
+    skip: True  # [(win and vc<14) or ppc64le]
     script: python setup.py config build install --old-and-unmanageable
 
 requirements:
