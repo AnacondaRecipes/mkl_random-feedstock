@@ -29,6 +29,7 @@ requirements:
       - mkl-devel  {{ mkl }}
       - cython
       - numpy-devel  1.11.*
+      - numpy 1.11.*
     run:
       - python
 
