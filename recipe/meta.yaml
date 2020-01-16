@@ -36,7 +36,6 @@ test:
       - nosetests -v mkl_random
     requires:
       - nose
-      - numpy >=1.14
     imports:
       - mkl_random
       - mkl_random.mklrand
