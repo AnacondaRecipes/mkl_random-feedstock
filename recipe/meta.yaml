@@ -13,8 +13,7 @@ build:
   skip: true  # [win and py27]
   ignore_run_exports:
     - blas
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"  # [not osx or py<37]
-  script: CFLAGS="$CFLAGS -fno-lto" {{ PYTHON }} -m pip install . --no-deps -vv  # [osx and py==37]
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   build:
