@@ -10,7 +10,8 @@ source:
 
 build:
   number: 0
-  skip: true  # [(win and py27) or ppc64le]
+  # numpy no longer supports python 3.6 and lower
+  skip: true  # [(win and py27) or ppc64le or py<37]
   ignore_run_exports:
     - blas
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
@@ -22,7 +23,7 @@ requirements:
   host:
     - python
     - pip
-    - mkl-devel
+    - mkl-devel  {{ mkl }}
     - cython
     - numpy-base {{ numpy }}
   run:
