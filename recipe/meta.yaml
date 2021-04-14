@@ -7,6 +7,8 @@ package:
 source:
   url: https://github.com/IntelPython/mkl_random/archive/v{{ version }}.tar.gz
   sha256: 722d3e383a1501749a7ba1f759e7cd1e1ecd7b0298fe6f7591e17102cf67484c
+  patches:
+    - 0001-removing-gcc-pragma-windows.patch                # [win]
 
 build:
   number: 0
