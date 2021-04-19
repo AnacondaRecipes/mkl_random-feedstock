@@ -13,8 +13,7 @@ source:
 
 build:
   number: 2
-  # numpy no longer supports python 3.6 and lower
-  skip: true  # [(win and py27) or ppc64le or py<37]
+  skip: true  # [(win and py27) or ppc64le]
   ignore_run_exports:
     - blas
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
