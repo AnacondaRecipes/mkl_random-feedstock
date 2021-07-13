@@ -1,18 +1,15 @@
-{% set version = "1.2.1" %}
+{% set version = "1.2.2" %}
 
 package:
   name: mkl_random
   version: {{ version }}
 
 source:
-  url: https://github.com/IntelPython/mkl_random/archive/v{{ version }}.tar.gz
-  sha256: 722d3e383a1501749a7ba1f759e7cd1e1ecd7b0298fe6f7591e17102cf67484c
-  patches:
-    - 0001-removing-gcc-pragma-windows.patch                # [win]
-    - 0002-remove-warning-count-in-tests.patch
+  url: https://github.com/IntelPython/mkl_random/archive/v{{ version }}.post1.tar.gz
+  sha256: 7f3fd565c55e9fc83bc617764ba631f716041e9c58d6805fcf864928ff2b4b33
 
 build:
-  number: 2
+  number: 0
   skip: true  # [(win and py27) or ppc64le]
   ignore_run_exports:
     - blas
@@ -44,13 +41,10 @@ test:
 
 about:
   home: http://github.com/IntelPython/mkl_random
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_file: LICENSE.txt
-  description:
-      NumPy-based implementation of random number generation sampling using Intel (R) Math Kernel Library,
-      mirroring numpy.random, but exposing all choices of sampling algorithms available in MKL.
-  summary:
-      Intel (R) MKL-powered package for sampling from common probability distributions into NumPy arrays.
+  description: NumPy-based implementation of random number generation sampling using Intel (R) Math Kernel Library, mirroring numpy.random, but exposing all choices of sampling algorithms available in MKL.
+  summary: Intel (R) MKL-powered package for sampling from common probability distributions into NumPy arrays.
 
 
 extra:
