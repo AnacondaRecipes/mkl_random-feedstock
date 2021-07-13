@@ -13,7 +13,6 @@ build:
   skip: true  # [(win and py27) or ppc64le]
   ignore_run_exports:
     - blas
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   build:
