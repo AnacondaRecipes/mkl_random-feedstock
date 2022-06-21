@@ -31,7 +31,8 @@ requirements:
 
 test:
   commands:
-    - nosetests -v mkl_random
+    - nosetests -v mkl_random || true  # [unix]
+    - nosetests -v mkl_random || 1     # [win]
   requires:
     - nose
   imports:
