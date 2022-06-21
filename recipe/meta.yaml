@@ -10,7 +10,7 @@ source:
 
 build:
   number: 1
-  skip: true  # [(win and py27) or ppc64le]
+  skip: true  # [(win and py27) or ppc64le or s390x or aarch64 or arm64]
   ignore_run_exports:
     - blas
 
