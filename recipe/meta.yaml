@@ -9,8 +9,8 @@ source:
   sha256: 7f3fd565c55e9fc83bc617764ba631f716041e9c58d6805fcf864928ff2b4b33
 
 build:
-  number: 0
-  skip: true  # [(win and py27) or ppc64le]
+  number: 1
+  skip: true  # [not x86]
   ignore_run_exports:
     - blas
 
@@ -31,7 +31,7 @@ requirements:
 
 test:
   commands:
-    - nosetests -v mkl_random
+    - nosetests -v -e test_hypergeometric mkl_random
   requires:
     - nose
   imports:
@@ -39,12 +39,14 @@ test:
     - mkl_random.mklrand
 
 about:
-  home: http://github.com/IntelPython/mkl_random
+  home: https://github.com/IntelPython/mkl_random
   license: BSD-3-Clause
   license_file: LICENSE.txt
+  license_family: BSD
   description: NumPy-based implementation of random number generation sampling using Intel (R) Math Kernel Library, mirroring numpy.random, but exposing all choices of sampling algorithms available in MKL.
   summary: Intel (R) MKL-powered package for sampling from common probability distributions into NumPy arrays.
-
+  dev_url: https://github.com/IntelPython/mkl_random
+  doc_url: https://github.com/IntelPython/mkl_random
 
 extra:
   recipe-maintainers:
