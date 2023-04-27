@@ -7,6 +7,8 @@ package:
 source:
   url: https://github.com/IntelPython/mkl_random/archive/v{{ version }}.post1.tar.gz
   sha256: 7f3fd565c55e9fc83bc617764ba631f716041e9c58d6805fcf864928ff2b4b33
+  patches:
+    - patches/0001-fix-sat-5359.patch
 
 build:
   number: 1
@@ -18,6 +20,8 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - patch  # [unix]
+    - m2-patch  # [win]
   host:
     - python
     - pip
