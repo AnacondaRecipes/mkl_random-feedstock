@@ -11,7 +11,7 @@ source:
     - patches/0001-fix-sat-5359.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [not x86]
   ignore_run_exports:
     - blas
@@ -31,13 +31,14 @@ requirements:
   run:
     - python
     - mkl
-    - numpy >={{ numpy }},<2.0a0
+    - {{ pin_compatible('numpy') }}
 
 test:
-  commands:
-    - nosetests -v -e test_hypergeometric mkl_random
-  requires:
-    - nose
+  # nose is incompatible with python 3.12
+  commands:                                            # [py<312]
+    - nosetests -v -e test_hypergeometric mkl_random   # [py<312]
+  requires:                                            # [py<312]
+    - nose                                             # [py<312]
   imports:
     - mkl_random
     - mkl_random.mklrand
