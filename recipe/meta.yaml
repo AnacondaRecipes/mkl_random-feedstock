@@ -11,6 +11,9 @@ source:
 build:
   number: 0
   skip: true  # [not x86]
+  script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
+  script_env:
+   - MKLROOT={{PREFIX}}
   ignore_run_exports:
     - blas
 
