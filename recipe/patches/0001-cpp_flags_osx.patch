@@ -1,0 +1,23 @@
+diff --git a/setup.py b/setup.py
+index ec5d1bb..d08f1d8 100644
+--- a/setup.py
++++ b/setup.py
+@@ -88,8 +88,6 @@ def extensions():
+     if sys.platform == 'win32':
+         libs.append('Advapi32')
+ 
+-    Q = '/Q' if sys.platform.startswith('win') or sys.platform == 'cygwin' else '-'
+-    eca = [Q + "std=c++11"]
+     if sys.platform == "linux":
+         eca.extend(["-Wno-unused-but-set-variable", "-Wno-unused-function"])
+ 
+@@ -113,9 +111,6 @@ def extensions():
+             include_dirs = [os.path.join("mkl_random", "src"), np.get_include()] + mkl_include_dirs,
+             libraries = libs,
+             library_dirs = lib_dirs,
+-            extra_compile_args = eca + [
+-                # "-ggdb", "-O0", "-Wall", "-Wextra",
+-            ],
+             define_macros=defs + [("NDEBUG",None),], # [("DEBUG", None),]
+             language="c++"
+         )

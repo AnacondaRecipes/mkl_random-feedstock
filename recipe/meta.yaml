@@ -7,11 +7,15 @@ package:
 source:
   url: https://github.com/IntelPython/mkl_random/archive/v{{ version }}.tar.gz
   sha256: bb2033d82f66d9a051af821a0c1d6b5506775e181b41752b4477932e077f6b03
+  patches:                              # [osx]
+    - patches/0001-cpp_flags_osx.patch  # [osx]
 
 build:
   number: 0
   skip: true  # [not x86]
-  script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
+  script: 
+    - CPPFLAGS="-std=c++11 $CPPFLAGS" 
+    - {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
    - MKLROOT={{PREFIX}}
   ignore_run_exports:
@@ -20,6 +24,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - patch  # [osx]
   host:
     - python
     - pip
