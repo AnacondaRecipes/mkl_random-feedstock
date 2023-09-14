@@ -14,10 +14,10 @@ build:
   number: 0
   skip: true  # [not x86]
   script: 
-    - CPPFLAGS="-std=c++11 $CPPFLAGS" 
+    - CXXFLAGS="${CXXFLAGS/-std=c++14/} -std=c++11"
     - {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
-   - MKLROOT={{PREFIX}}
+    - MKLROOT={{PREFIX}}
   ignore_run_exports:
     - blas
 
