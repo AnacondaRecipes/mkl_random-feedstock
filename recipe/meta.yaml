@@ -42,10 +42,12 @@ requirements:
     - {{ pin_compatible('numpy') }}
 
 test:
-  # nose is incompatible with python 3.12
-  commands:                                            # [py<312]
+  commands:
+    - pip check
+    # nose is incompatible with python 3.12
     - nosetests -v -e test_hypergeometric mkl_random   # [py<312]
-  requires:                                            # [py<312]
+  requires:
+    - pip
     - nose                                             # [py<312]
   imports:
     - mkl_random
