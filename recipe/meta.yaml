@@ -17,7 +17,7 @@ build:
   number: 0
   skip: true  # [not x86]
   script: 
-    - CXXFLAGS="${CXXFLAGS/-std=c++14/} -std=c++11"  # [osx]
+    - export CXXFLAGS="${CXXFLAGS/-std=c++[0-9a-z][0-9a-z]/} -std=c++11"  # [osx]
     - {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
     - MKLROOT={{PREFIX}}
