@@ -1,4 +1,4 @@
-{% set version = "1.2.3" %}
+{% set version = "1.2.4" %}
 
 package:
   name: mkl_random
@@ -6,19 +6,12 @@ package:
 
 source:
   url: https://github.com/IntelPython/mkl_random/archive/v{{ version }}.tar.gz
-  sha256: bb2033d82f66d9a051af821a0c1d6b5506775e181b41752b4477932e077f6b03
-  # clang does not appreciate having -std=c++11 set on the C compiler.
-  # This patch disables this. CXXFLAGS is later on set to include 
-  # -std=c++11 as a replacement.
-  patches:                              # [osx]
-    - patches/0001-cpp_flags_osx.patch  # [osx]
+  sha256: 9161eee81fbf27934eac1bc0d26ad3b933a582721fa66fe87e930ff2e9867c52
 
 build:
   number: 0
   skip: true  # [not x86]
-  script: 
-    - export CXXFLAGS="${CXXFLAGS/-std=c++[0-9a-z][0-9a-z]/} -std=c++11"  # [osx]
-    - {{PYTHON}} -m pip install --no-build-isolation --no-deps .
+  script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
     - MKLROOT={{PREFIX}}
   ignore_run_exports:
@@ -27,7 +20,6 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - patch  # [osx]
   host:
     - python
     - pip
