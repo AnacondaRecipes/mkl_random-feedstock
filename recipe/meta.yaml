@@ -11,6 +11,7 @@ source:
 build:
   number: 0
   skip: true  # [not x86]
+  skip: True  # [py<39 or py>=313]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
     - MKLROOT={{PREFIX}}
