@@ -29,7 +29,7 @@ requirements:
     - wheel
     - mkl-devel  {{ mkl }}
     - cython 3
-    - numpy-base >=1.16
+    - numpy-base {{ numpy }}
   run:
     - python
     - mkl
