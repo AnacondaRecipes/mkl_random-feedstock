@@ -43,6 +43,7 @@ test:
   requires:
     - pip
     - nose                                             # [py<312]
+    - pytest
   imports:
     - mkl_random
     - mkl_random.mklrand
