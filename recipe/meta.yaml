@@ -29,7 +29,7 @@ requirements:
     - wheel
     - mkl-devel  {{ mkl }}
     - cython 3
-    - numpy-base 2.0.0
+    - numpy-base >=1.16
   run:
     - python
     - mkl
@@ -37,13 +37,11 @@ requirements:
 
 test:
   commands:
-    - pip check
-    # nose is incompatible with python 3.12
-    - nosetests -v -e test_hypergeometric mkl_random   # [py<312]
+    - pytest --pyargs mkl_random
   requires:
-    - pip
-    - nose                                             # [py<312]
     - pytest
+    - mkl-service
+    - numpy
   imports:
     - mkl_random
     - mkl_random.mklrand
