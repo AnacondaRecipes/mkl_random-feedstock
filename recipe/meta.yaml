@@ -33,7 +33,7 @@ requirements:
   run:
     - python
     - mkl
-    - numpy
+    - numpy >=1.16
 
 test:
   commands:
