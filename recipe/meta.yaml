@@ -11,7 +11,7 @@ source:
 build:
   number: 0
   skip: true  # [not x86]
-  skip: True  # [py<37]
+  skip: True  # [py<39]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
     - MKLROOT={{PREFIX}}
@@ -29,7 +29,7 @@ requirements:
     - wheel
     - mkl-devel  {{ mkl }}
     - cython 3
-    - numpy-base {{ numpy }}
+    - numpy >=1.16
   run:
     - python
     - mkl
