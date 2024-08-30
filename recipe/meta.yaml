@@ -30,7 +30,6 @@ requirements:
     - mkl-devel  {{ mkl }}
     - cython 3
     - numpy-base 2.0.0
-    - numpy >=1.16
   run:
     - python
     - mkl
