@@ -9,17 +9,18 @@ source:
   sha256: b15a7f65903470ee96de05360886c2e3327a6a2f178aeba74405e2e627d7820c
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not x86]
   skip: True  # [py<39 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
-    - MKLROOT={{PREFIX}}
+    - MKLROOT={{ PREFIX }}
   ignore_run_exports:
     - blas
 
 requirements:
   build:
+    - {{ stdlib('c') }}  # [linux]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -27,13 +28,13 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - mkl-devel  {{ mkl }}
+    - mkl-devel 2025.*
     - cython 3
     - numpy-base 2
   run:
     - python
     - mkl
-    - numpy >=1.16
+    - numpy >=1.16,<3
 
 test:
   commands:
@@ -59,5 +60,7 @@ about:
   doc_url: https://github.com/IntelPython/mkl_random
 
 extra:
+  skip-lints:
+    - cbc_dep_in_run_missing_from_host
   recipe-maintainers:
     - oleksandr-pavlyk
