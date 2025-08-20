@@ -1,4 +1,4 @@
-{% set version = "1.2.8" %}
+{% set version = "1.2.11" %}
 
 package:
   name: mkl_random
@@ -6,12 +6,14 @@ package:
 
 source:
   url: https://github.com/IntelPython/mkl_random/archive/v{{ version }}.tar.gz
-  sha256: b15a7f65903470ee96de05360886c2e3327a6a2f178aeba74405e2e627d7820c
+  sha256: 34da68f6992f8c00a991caf7367db5ff4a4492440d2b761fec747de954596a0a
+  patches:
+    - patches/0001-enable-python-3.14.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [not x86]
-  skip: True  # [py<39 or osx]
+  skip: true  # [py<39 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
     - MKLROOT={{ PREFIX }}
@@ -26,15 +28,14 @@ requirements:
   host:
     - python
     - pip
-    - setuptools
-    - wheel
+    - setuptools >=77
     - mkl-devel 2025.*
-    - cython 3
+    - cython
     - numpy-base 2
   run:
     - python
     - mkl
-    - numpy >=1.16,<3
+    - numpy >=1.26.4
 
 test:
   commands:

@@ -1,0 +1,25 @@
+From 68bbaa7fc683b343130c413629a57e08caa63154 Mon Sep 17 00:00:00 2001
+From: Ian Fitchet <ifitchet@anaconda.com>
+Date: Wed, 20 Aug 2025 18:47:55 +0100
+Subject: [PATCH] enable python 3.14
+
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 1e24356..7abbea5 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -59,7 +59,7 @@ keywords = ["MKL", "VSL", "true randomness", "pseudorandomness",
+ license = "BSD-3-Clause"
+ name = "mkl_random"
+ readme = {file = "README.md", content-type = "text/markdown"}
+-requires-python = ">=3.9,<3.14"
++requires-python = ">=3.9,<3.15"
+ 
+ [project.optional-dependencies]
+ test = ["pytest"]
+-- 
+2.45.2
+
