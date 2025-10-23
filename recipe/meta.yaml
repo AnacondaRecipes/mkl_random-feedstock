@@ -8,6 +8,8 @@ source:
   url: https://github.com/IntelPython/mkl_random/archive/{{ version }}.tar.gz
   sha256: 4f4d6ee649e694eb94bc0a039f4db259d329a901bc706cb1648c41ebfa96d35e
   patches:
+    # 1) Fix pyproject.toml license format and python version constraint
+    # 2) pyproject.toml shows dependency on mkl, which we call mkl-service in conda...
     - 0001-fix-pyproject-toml.patch
 
 build:
@@ -39,20 +41,19 @@ requirements:
   run:
     - python
     - mkl
+    - mkl-service
     - numpy >=1.16,<3
 
 test:
-  commands:
-    - pip check
-    - pytest --pyargs mkl_random
-  requires:
-    - pip
-    - pytest
-    - mkl-service
-    - numpy
   imports:
     - mkl_random
     - mkl_random.mklrand
+  requires:
+    - pip
+    - pytest
+  commands:
+    - pip check
+    - pytest --pyargs mkl_random
 
 about:
   home: https://github.com/IntelPython/mkl_random
