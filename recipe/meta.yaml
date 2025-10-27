@@ -15,8 +15,7 @@ source:
 build:
   number: 0
   skip: true  # [not x86]
-  # numpy-base 2.3.0 no longer supports Python 3.10: https://numpy.org/devdocs/release/2.3.0-notes.html
-  skip: True  # [py<311 or osx]
+  skip: True  # [py<39 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
     - MKLROOT={{ PREFIX }}
