@@ -1,0 +1,45 @@
+From e8295d1ede07d8586ec79308e42d84ad5fed8fd9 Thu Oct 23 14:14:42 2025
+From: Serhii Kupriienko
+Date: Thu, 23 Oct 2025 14:14:42 +0300
+Subject: [PATCH] Fix setuptools, license, python constraint
+
+---
+ pyproject.toml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 1e24356..b279bca 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -25,7 +25,7 @@
+ 
+ [build-system]
+ build-backend = "setuptools.build_meta"
+-requires = ["setuptools>=77", "Cython", "numpy"]
++requires = ["setuptools>=64", "Cython", "numpy"]
+ 
+ [project]
+ authors = [
+@@ -50,16 +50,16 @@ classifiers = [
+     "Operating System :: POSIX",
+     "Operating System :: Unix"
+ ]
+-dependencies = ["numpy >=1.26.4", "mkl"]
++dependencies = ["numpy >=1.26.4"]
+ description = "NumPy-based Python interface to Intel (R) MKL Random Number Generation functionality"
+ dynamic = ["version"]
+ keywords = ["MKL", "VSL", "true randomness", "pseudorandomness",
+             "Philox", "MT-19937", "SFMT-19937", "MT-2203", "ARS-5",
+             "R-250", "MCG-31"]
+-license = "BSD-3-Clause"
++license = {text = "BSD-3-Clause"}
+ name = "mkl_random"
+ readme = {file = "README.md", content-type = "text/markdown"}
+-requires-python = ">=3.9,<3.14"
++requires-python = ">=3.9,<3.15"
+ 
+ [project.optional-dependencies]
+ test = ["pytest"]
+-- 
+2.50.1 (Apple Git-155)
+
