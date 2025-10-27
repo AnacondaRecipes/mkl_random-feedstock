@@ -25,24 +25,22 @@ build:
 
 requirements:
   build:
-    - {{ stdlib('c') }}  # [linux]
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
     - python
     - cython 3
     - mkl-devel 2025.*
-    - numpy-base >=2.3,<3
+    - numpy-base {{ numpy }}
     - pip
     # numpy-base 2.3.3 requires setuptools <74
     # The patch changes license format to {text = "BSD"} which works with setuptools <74
     - setuptools >=64,<74
-    - wheel
   run:
     - python
     - mkl
-    - mkl-service
-    - numpy >=1.16,<3
+    - numpy >=1.26.4,<3
 
 test:
   imports:
