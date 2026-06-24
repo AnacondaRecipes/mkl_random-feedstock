@@ -8,10 +8,6 @@ package:
 source:
   url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
   sha256: bf9a1e946648cf632f1774734aad465636228b19e817fa2845f13d15b01d4865
-  #patches:
-    # 1) Fix pyproject.toml license format and python version constraint
-    # 2) pyproject.toml shows dependency on mkl, which we call mkl-service in conda...
-    #- 0001-fix-pyproject-toml.patch
 
 build:
   number: 0
