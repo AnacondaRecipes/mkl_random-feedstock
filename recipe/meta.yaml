@@ -1,26 +1,24 @@
-{% set version = "1.3.0" %}
+{% set name = "mkl_random" %}
+{% set version = "1.4.1" %}
 
 package:
-  name: mkl_random
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/IntelPython/mkl_random/archive/{{ version }}.tar.gz
-  sha256: 4f4d6ee649e694eb94bc0a039f4db259d329a901bc706cb1648c41ebfa96d35e
-  patches:
-    # 1) Fix pyproject.toml license format and python version constraint
-    # 2) pyproject.toml shows dependency on mkl, which we call mkl-service in conda...
-    - 0001-fix-pyproject-toml.patch
+  url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: bf9a1e946648cf632f1774734aad465636228b19e817fa2845f13d15b01d4865
 
 build:
   number: 0
-  skip: true  # [not x86]
-  skip: True  # [py<39 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
     - MKLROOT={{ PREFIX }}
   ignore_run_exports:
     - blas
+  skip: true  # [py<310 or py>314]
+  skip: true  # [osx]
+  skip: true  # [linux and aarch64]
 
 requirements:
   build:
@@ -28,29 +26,27 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
+    - pip
     - python
     - cython 3
-    - mkl-devel 2025.*
+    - mkl-devel {{ mkl }}
     - numpy-base {{ numpy }}
-    - pip
-    # numpy-base 2.3.3 requires setuptools <74
-    # The patch changes license format to {text = "BSD"} which works with setuptools <74
-    - setuptools >=64,<74
+    - setuptools >=77
   run:
     - python
     - mkl
-    - numpy >=1.26.4,<3
+    - numpy >=1.26.4
 
 test:
   imports:
     - mkl_random
     - mkl_random.mklrand
-  requires:
-    - pip
-    - pytest
   commands:
     - pip check
     - pytest --pyargs mkl_random
+  requires:
+    - pip
+    - pytest
 
 about:
   home: https://github.com/IntelPython/mkl_random
