@@ -1,11 +1,15 @@
 # Required for glibc >= 2.26 for intel-openmp to work.
 pkg_build_image_tag: main-rockylinux-8
 build_env_vars:
-  ANACONDA_ROCKET_ENABLE_PY314 : yes
-
-# the conda build parameters to use
+  ANACONDA_ROCKET_ENABLE_FREETHREADING: yes
 build_parameters:
   - "--suppress-variables"
   - "--skip-existing"
   - "--error-overlinking"
   - "--no-test"
+channels:
+  - https://staging.continuum.io/pbp/fs/numpy-feedstock/pr162/71f1ef8
+  - https://staging.continuum.io/pbp/fs/cython-feedstock/pr36/9bdfa6a
+  - https://staging.continuum.io/pbp/fs/setuptools-feedstock/pr109/9b1e75c
+  - https://staging.continuum.io/pbp/fs/meson-python-feedstock/pr22/fd7905b
+  - https://staging.continuum.io/pbp/fs/packaging-feedstock/pr26/ed52c28
