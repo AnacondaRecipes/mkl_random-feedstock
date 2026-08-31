@@ -10,7 +10,7 @@ source:
   sha256: bf9a1e946648cf632f1774734aad465636228b19e817fa2845f13d15b01d4865
 
 build:
-  number: 0
+  number: 1
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
     - MKLROOT={{ PREFIX }}
