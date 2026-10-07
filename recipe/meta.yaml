@@ -8,15 +8,22 @@ package:
 source:
   url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
   sha256: bf9a1e946648cf632f1774734aad465636228b19e817fa2845f13d15b01d4865
+  patches:
+    # Upstream 1.4.1 still has requires-python <3.15.
+    - patches/0001-enable-python-3.15.patch
 
 build:
-  number: 0
+  number: 1
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
     - MKLROOT={{ PREFIX }}
   ignore_run_exports:
     - blas
-  skip: true  # [py<310 or py>314]
+    # py315 extensions do not use the C++ runtime and use the Windows CRT directly.
+    - libstdcxx     # [linux and py>=315]
+    - vc14_runtime  # [win and py>=315]
+    - ucrt          # [win and py>=315]
+  skip: true  # [py<310 or py>315]
   skip: true  # [osx]
   skip: true  # [linux and aarch64]
 
