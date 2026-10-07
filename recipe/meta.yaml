@@ -17,7 +17,7 @@ build:
   script: {{ PYTHON }} -m pip install --no-build-isolation --no-deps . -vv
   ignore_run_exports:
     - blas
-  skip: true  # [osx or (linux and aarch64) or py<310 or py>315]
+  skip: true  # [osx or (not x86_64) or py<310 or py>315]
 
 requirements:
   build:
