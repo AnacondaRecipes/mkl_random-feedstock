@@ -1,5 +1,5 @@
 {% set name = "mkl_random" %}
-{% set version = "1.4.1" %}
+{% set version = "1.5.0" %}
 
 package:
   name: {{ name }}
@@ -7,31 +7,33 @@ package:
 
 source:
   url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: bf9a1e946648cf632f1774734aad465636228b19e817fa2845f13d15b01d4865
+  sha256: e1bcdd3efbffef1416fcc556cd8215dd3a89887baf5e50b596573438a137ed3e
+  patches:
+    # Upstream 1.5.0 still has requires-python <3.15.
+    - patches/0001-enable-python-3.15.patch
 
 build:
   number: 0
-  script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
-  script_env:
-    - MKLROOT={{ PREFIX }}
+  script: {{ PYTHON }} -m pip install --no-build-isolation --no-deps . -vv
   ignore_run_exports:
     - blas
-  skip: true  # [py<310 or py>314]
-  skip: true  # [osx]
-  skip: true  # [linux and aarch64]
+  skip: true  # [osx or (not x86_64) or py<310 or py>315]
 
 requirements:
   build:
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - cmake
+    - ninja-base
   host:
-    - pip
     - python
-    - cython 3
+    - pip
+    - meson-python >=0.16.0
+    - meson >=1.8.3
+    - cython
     - mkl-devel {{ mkl }}
     - numpy-base {{ numpy }}
-    - setuptools >=77
   run:
     - python
     - mkl
